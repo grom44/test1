@@ -1,0 +1,22 @@
+parameters:
+    example_one.operator_price_modifier: 101
+
+services:
+
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    ExampleOneBundle\:
+        resource: '../../../ExampleOneBundle/*'  
+        exclude: '../../../ExampleOneBundle/{Entity}' 
+        
+    ExampleOneBundle\Service\Operator:
+        arguments:
+            $session: '@session'
+        
+    ExampleOneBundle\Service\PriceModifier:
+        arguments:
+            $modifier: '%example_one.operator_price_modifier%'
+            $operator: '@ExampleOneBundle\Service\Operator'    
